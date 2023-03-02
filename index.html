@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello There!</h1>
+    <h3>Please input your name below, to get greeting message from the server!</h3>
+    <input id="input" />
+    <button id="submit">Say hello</button>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <script>
+        const URL = "https://adetxt-ideal-bassoon-xx56w4p4jv4265g6-3000.preview.app.github.dev";
+        const socket = io(URL, { autoConnect: true, withCredentials: true, });
+
+        const input = document.querySelector("#input")
+        const btn = document.querySelector("#submit")
+        btn.addEventListener("click", () => {
+            socket.emit("ping", {name: input.value})
+        })
+
+        socket.on("pong", (m) => {
+            alert(m)
+        });
+    </script>
+</body>
+</html>
